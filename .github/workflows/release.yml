@@ -6,10 +6,8 @@ name: CI
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-
+    tags:
+    - '*'
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -31,7 +29,7 @@ jobs:
         
       # Zip up files to be deployed as part of the release materials.
       - name: copy documentation file
-        run: zip -qq -r GlobalTestData.zip GlobalTestData
+        run: zip -qq -r GlobalTestData_v*.zip GlobalTestData
           
       # Uploads the release materials as build artifact
       - uses: actions/upload-artifact@v2
