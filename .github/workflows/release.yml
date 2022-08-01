@@ -27,11 +27,8 @@ jobs:
 
       # Makes a copy of the STS Global Test Data Management.pdf to be deployed as part of the release materials.
       - name: copy documentation file
-        uses: canastro/copy-file-action@master
-        with:
-          source: "STSGlobalTestDataTemplate/STS\ Global\ Test\ Data\ Management.pdf"
-          target: "STSGlobalTestDataTemplate/GlobalTestData/GlobalTestData-ReadMe.pdf"
-      
+        run: cp STS\ Global\ Test\ Data\ Management.pdf GlobalTestData/GlobalTestData-ReadMe.pdf
+        
       # Zips up the GlobalTestData directory, with the GlobalTestData-ReadMe.pdf documenation inside.
       - uses: montudor/action-zip@v1
         with:
