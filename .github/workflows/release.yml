@@ -24,8 +24,16 @@ jobs:
       - uses: actions/checkout@v3
       
       # Get the version/tag
-      - uses: olegtarasov/get-tag@v2.1
-        id: tagName
+      - name: Get tag
+        id: tag
+        uses: dawidd6/action-get-tag@v1
+        with:
+          # Optionally strip `v` prefix
+          strip_v: true
+      
+      # Echo version/tag
+      - name: verson
+        run: echo ${{steps.tagName.outputs.tag}}
         
       # Makes a copy of the STS Global Test Data Management.pdf to be included in the deployment files for the release.
       - name: copy documentation file
@@ -33,13 +41,13 @@ jobs:
         
       # Zip up files to be deployed as part of the release materials.
       - name: zip release materials
-        run: zip -qq -r GlobalTestData_v$GIT_TAG_NAME.zip GlobalTestData
+        run: zip -qq -r GlobalTestData.zip GlobalTestData
           
       # Uploads the release materials as build artifact
       - uses: actions/upload-artifact@v2
         with:
           name: GlobalTestData.zip
-          path: GlobalTestData_v$GIT_TAG_NAME.zip
+          path: GlobalTestData.zip
 
       - uses: ncipollo/release-action@v1
         with:
