@@ -32,14 +32,14 @@ jobs:
         run: cp STS\ Global\ Test\ Data\ Management.pdf GlobalTestData/GlobalTestData-ReadMe.pdf
         
       # Zip up files to be deployed as part of the release materials.
-      - name: copy documentation file
-        run: zip -qq -r GlobalTestData_v${{ steps.tagName.outputs.tag }}.zip GlobalTestData
+      - name: zip release materials
+        run: zip -qq -r GlobalTestData_v$GIT_TAG_NAME.zip GlobalTestData
           
       # Uploads the release materials as build artifact
       - uses: actions/upload-artifact@v2
         with:
           name: GlobalTestData.zip
-          path: GlobalTestData_v${{ steps.tagName.outputs.tag }}.zip
+          path: GlobalTestData_v$GIT_TAG_NAME.zip
 
       - uses: ncipollo/release-action@v1
         with:
