@@ -26,10 +26,7 @@ jobs:
       # Get the version/tag
       - uses: olegtarasov/get-tag@v2.1
         id: tagName
-        with:
-          tagRegex: "foobar-(.*)"  # Optional. Returns specified group text as tag name. Full tag string is returned if regex is not defined.
-          tagRegexGroup: 1 # Optional. Default is 1.
-
+        
       # Makes a copy of the STS Global Test Data Management.pdf to be included in the deployment files for the release.
       - name: copy documentation file
         run: cp STS\ Global\ Test\ Data\ Management.pdf GlobalTestData/GlobalTestData-ReadMe.pdf
