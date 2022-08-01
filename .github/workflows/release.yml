@@ -34,3 +34,8 @@ jobs:
         with:
           name: GlobalTestData
           path: GlobalTestData
+
+      - uses: ncipollo/release-action@v1
+        with:
+          artifacts: GlobalTestData
+          token: ${{ secrets.GITHUB_WORKFLOW }}
