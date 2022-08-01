@@ -23,9 +23,12 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
       
-      - name: Get the version
-        id: get_version
-        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+      # Get the version/tag
+      - uses: olegtarasov/get-tag@v2.1
+        id: tagName
+        with:
+          tagRegex: "foobar-(.*)"  # Optional. Returns specified group text as tag name. Full tag string is returned if regex is not defined.
+          tagRegexGroup: 1 # Optional. Default is 1.
 
       # Makes a copy of the STS Global Test Data Management.pdf to be included in the deployment files for the release.
       - name: copy documentation file
@@ -33,13 +36,13 @@ jobs:
         
       # Zip up files to be deployed as part of the release materials.
       - name: copy documentation file
-        run: zip -qq -r GlobalTestData_v${GITHUB_REF/refs\/tags\//}.zip GlobalTestData
+        run: zip -qq -r GlobalTestData_v${{ steps.tagName.outputs.tag }}.zip GlobalTestData
           
       # Uploads the release materials as build artifact
       - uses: actions/upload-artifact@v2
         with:
           name: GlobalTestData.zip
-          path: GlobalTestData_v${GITHUB_REF/refs\/tags\//}.zip
+          path: GlobalTestData_v${{ steps.tagName.outputs.tag }}.zip
 
       - uses: ncipollo/release-action@v1
         with:
