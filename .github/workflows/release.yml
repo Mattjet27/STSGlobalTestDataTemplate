@@ -37,11 +37,11 @@ jobs:
         
       # Makes a copy of the STS Global Test Data Management.pdf to be included in the deployment files for the release.
       - name: copy documentation file
-        run: cp STS\ Global\ Test\ Data\ Management.pdf GlobalTestData/GlobalTestData-ReadMe.pdf
+        run: cp docs/STSGlobalTestDataManagement.pdf src/GlobalTestData/GlobalTestData-ReadMe.pdf
         
       # Zip up files to be deployed as part of the release materials.
       - name: zip release materials
-        run: zip -qq -r GlobalTestData_${{steps.tagName.outputs.tag}}.zip GlobalTestData
+        run: zip -qq -r GlobalTestData_${{steps.tagName.outputs.tag}}.zip src/GlobalTestData
           
       # Uploads the release materials as build artifact
       - uses: actions/upload-artifact@v2
