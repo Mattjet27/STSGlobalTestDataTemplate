@@ -33,13 +33,13 @@ jobs:
         
       # Zip up files to be deployed as part of the release materials.
       - name: copy documentation file
-        run: zip -qq -r GlobalTestData_v${VERSION}.zip GlobalTestData
+        run: zip -qq -r GlobalTestData_v${GITHUB_REF/refs\/tags\//}.zip GlobalTestData
           
       # Uploads the release materials as build artifact
       - uses: actions/upload-artifact@v2
         with:
           name: GlobalTestData.zip
-          path: GlobalTestData_v${VERSION}.zip
+          path: GlobalTestData_v${GITHUB_REF/refs\/tags\//}.zip
 
       - uses: ncipollo/release-action@v1
         with:
