@@ -29,8 +29,8 @@ jobs:
       - name: copy documentation file
         uses: canastro/copy-file-action@master
         with:
-          source: "STS Global Test Data Management.pdf"
-          target: "GlobalTestData/GlobalTestData-ReadMe.pdf"
+          source: "STSGlobalTestDataTemplate/STS Global Test Data Management.pdf"
+          target: "STSGlobalTestDataTemplate/GlobalTestData/GlobalTestData-ReadMe.pdf"
       
       # Zips up the GlobalTestData directory, with the GlobalTestData-ReadMe.pdf documenation inside.
       - uses: montudor/action-zip@v1
