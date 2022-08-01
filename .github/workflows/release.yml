@@ -25,17 +25,21 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
-      # Makes a copy of the STS Global Test Data Management.pdf to be deployed as part of the release materials.
+      # Makes a copy of the STS Global Test Data Management.pdf to be included in the deployment files for the release.
       - name: copy documentation file
         run: cp STS\ Global\ Test\ Data\ Management.pdf GlobalTestData/GlobalTestData-ReadMe.pdf
+        
+      # Zip up files to be deployed as part of the release materials.
+      - name: copy documentation file
+        run: zip -qq -r GlobalTestData.zip GlobalTestData
           
       # Uploads the release materials as build artifact
       - uses: actions/upload-artifact@v2
         with:
-          name: GlobalTestData
-          path: GlobalTestData
+          name: GlobalTestData.zip
+          path: GlobalTestData.zip
 
       - uses: ncipollo/release-action@v1
         with:
-          artifacts: GlobalTestData
+          artifacts: GlobalTestData.zip
           tag: test_release
