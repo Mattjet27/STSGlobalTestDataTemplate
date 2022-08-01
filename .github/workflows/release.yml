@@ -37,5 +37,5 @@ jobs:
       # Uploads the zip fil as the new release
       - uses: actions/upload-artifact@v2
         with:
-          name: GlobalTestData.zip
+          name: GlobalTestData
           path: GlobalTestData.zip
